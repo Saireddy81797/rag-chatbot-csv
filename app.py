@@ -9,7 +9,7 @@ from langchain.chains import RetrievalQA
 
 # Load environment variables
 load_dotenv()
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # Streamlit UI
 st.title("📄 RAG Chatbot on CSV using LangChain + OpenAI")
