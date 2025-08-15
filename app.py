@@ -10,14 +10,23 @@ from langchain.chains import RetrievalQA
 # ----------------------------
 # Load API key
 # ----------------------------
-# 1. Load from .env locally
-load_dotenv()  
-
-# 2. Prefer Streamlit secrets if available
+load_dotenv()  # Load .env locally
 api_key = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
-
-# Set as environment variable so LangChain/OpenAI can detect it
 os.environ["OPENAI_API_KEY"] = api_key
+
+# ----------------------------
+# TEST API KEY (temporary)
+# ----------------------------
+try:
+    from openai import OpenAI
+    client = OpenAI()
+    resp = client.embeddings.create(
+        model="text-embedding-3-small",
+        input="Hello world"
+    )
+    st.success("✅ OpenAI API key works! First 5 embedding numbers: " + str(resp.data[0].embedding[:5]))
+except Exception as e:
+    st.error(f"❌ API key failed: {e}")
 
 # ----------------------------
 # Streamlit UI
@@ -42,7 +51,7 @@ if uploaded_file:
     vectorstore = FAISS.from_documents(docs, embeddings)
 
     # Create RetrievalQA chain
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo")  # Key is in environment
+    llm = ChatOpenAI(model_name="gpt-3.5-turbo")
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         retriever=vectorstore.as_retriever(),
