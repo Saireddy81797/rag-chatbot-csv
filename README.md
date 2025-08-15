@@ -11,5 +11,7 @@ Built with LangChain, OpenAI API, and FAISS for semantic search.
 - Answers in natural language using GPT
 
 ## Setup
-1. Clone the repo:
+
+1. Install dependencies:
 ```bash
+pip install -r requirements.txt
