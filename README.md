@@ -1,7 +1,7 @@
 # RAG Chatbot on CSV using LangChain + OpenAI
 
 ## Overview
-A Retrieval-Augmented Generation (RAG) chatbot that answers questions from a CSV file.  
+A Retrieval-Augmented Generation (RAG) chatbot that answers questions from a CSV file.   
 Built with LangChain, OpenAI API, and FAISS for semantic search.
 
 ## Features
